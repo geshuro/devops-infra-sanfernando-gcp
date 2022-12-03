@@ -197,3 +197,19 @@ variable "metadata" {
   description = "Key-value map of additional metadata to assign to the instances"
   default     = {}
 }
+//atributos adicionales a modulo original
+variable "disk_size_gb" {
+  description = "Boot disk size in GB"
+  default     = 100
+}
+
+variable "disk_type" {
+  description = "Boot disk type, can be either pd-ssd, local-ssd, or pd-standard"
+  default     = "pd-standard"
+}
+
+variable "additional_ports" {
+  description = "A list of additional ports/ranges to open access to on the instances from IAP."
+  type        = list(string)
+  default     = []
+}

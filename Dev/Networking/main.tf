@@ -104,7 +104,7 @@ module "vpc" {
         metadata = "INCLUDE_ALL_METADATA"
       }
     },
-    {
+    /*{
       name      = "deny-udp-egress"
       direction = "INGRESS"
       ranges    = ["0.0.0.0/0"]
@@ -112,10 +112,10 @@ module "vpc" {
         protocol = "udp"
         ports    = null
       }]
-    },
+    },*/
   ]
 
-  routes = [
+  /*routes = [
     {
         name                   = "egress-internet"
         description            = "route through IGW to access internet"
@@ -123,13 +123,29 @@ module "vpc" {
         tags                   = "egress-inet"
         next_hop_internet      = "true"
     },
-    /*{
+   {
         name                   = "app-proxy"
         description            = "route through proxy to reach app"
         destination_range      = "10.50.10.0/24"
         tags                   = "app-proxy"
         next_hop_instance      = "app-proxy-instance"
         next_hop_instance_zone = "${var.region}-a"
-    },*/
+    },
+  ]*/
+}
+
+module "cloud_router" {
+  source  = "../../Modules/terraform-google-cloud-router"
+  project = var.project_id
+  name    = "cloud-router-dev"
+  network = var.network_name
+  region  = var.region
+
+  nats = [{
+    name = "nat-gateway-dev"
+    source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+  }]
+  depends_on = [
+    module.vpc
   ]
 }

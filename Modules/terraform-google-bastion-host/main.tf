@@ -45,7 +45,7 @@ resource "google_service_account" "bastion_host" {
 module "instance_template" {
   #source  = "terraform-google-modules/vm/google//modules/instance_template"
   #version = "~> 7.3"
-  source  = "../Modules/terraform-google-vm/modules/instance_template"
+  source  = "../terraform-google-vm/modules/instance_template"
 
   name_prefix         = var.name_prefix
   project_id          = var.project

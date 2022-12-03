@@ -5,12 +5,12 @@ variable "bucket_name" {
 
 variable "project_name" {
   description = "The name of Project"
-  default     = "sanfernando-dev"
+  default     = "sanfernando-id-desarrollo"
 }
 
 variable "project_id" {
   description = "The ID of the project in which the resource belongs. If it is not provided, the provider project is used."
-  default     = "sanfernando-dev-369401"
+  default     = "sanfernando-id-desarrollo"
 }
 
 variable "environment" {
@@ -22,7 +22,7 @@ variable "environment" {
 variable "region" {
   type        = string
   description = "Backend region of remote state for terraform"
-  default     = "us-east1"
+  default     = "us-central1"
 }
 
 variable "prefix" {
@@ -53,7 +53,7 @@ variable "enable_versioning" {
 variable "owner" {
   type        = string
   description = "User id of GCP account"
-  default     = "iymendoza-geshuro"
+  default     = "isaac.mendoza.huamani@gmail.com"
 }
 
 variable "costcenter" {

@@ -40,12 +40,16 @@ module "iap_bastion" {
   fw_name_allow_ssh_from_iap         = var.fw_name_allow_ssh_from_iap
   create_instance_from_template      = false
   metadata                           = var.metadata
+  //atributos adicionales a modulo original
+  disk_size_gb                       = var.disk_size_gb
+  disk_type                          = var.disk_type
+  additional_ports                   = var.additional_ports
 }
 
 module "mig" {
   #source  = "terraform-google-modules/vm/google//modules/mig"
   #version = "~> 7.3"
-  source  = "../../../../Modules/terraform-google-vm/modules/mig"
+  source  = "../../../terraform-google-vm/modules/mig"
 
   project_id        = var.project
   region            = var.region
@@ -62,7 +66,7 @@ resource "google_compute_firewall" "allow_from_iap_to_bastion" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["22","3306"]
   }
 
   # Allow access to the bastion instances from the Health Check endpoints
