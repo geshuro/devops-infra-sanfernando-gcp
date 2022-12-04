@@ -1,14 +1,14 @@
 ###############################################################################################################
 # 
-terraform_remote_state_bucket = "sanfernando-id-desarrollo-tfstate-dev-974f5e2777751dffd9b5"
+terraform_remote_state_bucket = "sanfernando-id-desarrollo-tfstate-dev-e08fa5cb60758852ac89"
 
 terraform_remote_state_prefix = "terraform/dev.tfstate"
 
-project_id = "sanfernando-id-desarrollo"
+project_id = "alpine-effort-370518"
 
-region = "us-central1"
+region = "us-west1"
 
-zona = "us-central1-a"
+zona = "us-west1-a"
 
 hostname = "api"
 
@@ -22,7 +22,7 @@ startup_script = ""
 
 subnetwork = "vpcdev-priv-subnet-02"
 
-subnetwork_project = "sanfernando-id-desarrollo"
+subnetwork_project = "alpine-effort-370518"
 
 source_image = "projects/ubuntu-os-cloud/global/images/ubuntu-2204-jammy-v20221123"
 
@@ -34,7 +34,7 @@ disk_labels = { "api" : "true" }
 
 target_size = 1
 
-distribution_policy_zones = ["us-central1-a", "us-central1-b"]
+distribution_policy_zones = ["us-west1-a", "us-west1-b"]
 
 max_replicas = 2
 

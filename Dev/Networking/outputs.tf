@@ -39,6 +39,11 @@ output "subnets_ids" {
   description = "The IDs of the subnets being created"
 }
 
+/*output "subnets_ids_01" {
+  value       = [for network in module.subnets.subnets : network.id]
+  description = "The IDs of the subnets being created"
+}*/
+
 output "subnets_ips" {
   value       = module.vpc.subnets_ips
   description = "The IP and cidrs of the subnets being created"

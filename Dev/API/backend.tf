@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket      = "sanfernando-id-desarrollo-tfstate-dev-974f5e2777751dffd9b5"
+    bucket      = "sanfernando-id-desarrollo-tfstate-dev-e08fa5cb60758852ac89"
     prefix      = "terraform/dev.tfstate"
     credentials = "gcloud-service-account.json"
   }

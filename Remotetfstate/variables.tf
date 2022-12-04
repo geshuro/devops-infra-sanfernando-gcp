@@ -27,7 +27,7 @@ variable "region" {
 
 variable "prefix" {
   description = "The name of the Blob used to retrieve/store Terraform's State file inside the Storage Container."
-  default     = "terrform/dev.tfstate"
+  default     = "terraform/dev.tfstate"
 }
 
 variable "backend_output_path" {
@@ -53,7 +53,7 @@ variable "enable_versioning" {
 variable "owner" {
   type        = string
   description = "User id of GCP account"
-  default     = "isaac.mendoza.huamani@gmail.com"
+  default     = "iymendozah@geshuro.com"
 }
 
 variable "costcenter" {
