@@ -11,3 +11,4 @@ terraform plan -var-file=variables.tfvars
 terraform apply -var-file=variables.tfvars -auto-approve
 mkdir -p ../../Outputs/Dev
 terraform output -json > ../../Outputs/Dev/networking.json
+terraform destroy -var-file=variables.tfvars -auto-approve
