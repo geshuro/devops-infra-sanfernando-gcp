@@ -1,15 +1,15 @@
 ###############################################################################################################
 # 
-project_id = "alpine-effort-370518"
+project_id = "sanfernando-id-desarrollo"
 
 db_name = "mysql-private"
 
-region = "us-west1"
+region = "us-central1"
 
-zona = "us-west1-a"
+zona = "us-central1-a"
 
 mysql_tier = "db-f1-micro"
 
-terraform_remote_state_bucket = "sanfernando-id-desarrollo-tfstate-dev-e08fa5cb60758852ac89"
+terraform_remote_state_bucket = "sanfernando-id-desarrollo-tfstate-dev-974f5e2777751dffd9b5"
 
 terraform_remote_state_prefix = "terraform/dev.tfstate"

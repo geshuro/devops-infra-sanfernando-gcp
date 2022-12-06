@@ -1,18 +1,18 @@
 ###############################################################################################################
 # 
-terraform_remote_state_bucket = "sanfernando-id-desarrollo-tfstate-dev-e08fa5cb60758852ac89"
+terraform_remote_state_bucket = "sanfernando-id-desarrollo-tfstate-dev-974f5e2777751dffd9b5"
 
 terraform_remote_state_prefix = "terraform/dev.tfstate"
 
-project_id = "alpine-effort-370518"
+project_id = "sanfernando-id-desarrollo"
 
-region = "us-west1"
+region = "us-central1"
 
-zona = "us-west1-a"
+zona = "us-central1-a"
 
-subnet_network_self_link = "https://www.googleapis.com/compute/v1/projects/alpine-effort-370518/regions/us-west1/subnetworks/vpcdev-priv-subnet-02"
+subnet_network_self_link = "https://www.googleapis.com/compute/v1/projects/sanfernando-id-desarrollo/regions/us-central1/subnetworks/vpcdev-pub-subnet-01"
 
-members = ["user:iymendozah@geshuro.com"]
+members = ["user:isaac.mendoza.huamani@gmail.com","user:alonso.geronimo@delfosti.com"]
 
 machine_type = "e2-small"
 

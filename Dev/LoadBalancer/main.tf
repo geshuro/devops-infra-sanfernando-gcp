@@ -11,11 +11,6 @@ provider "google" {
   region      = "${var.region}"
 }
 
-resource "google_compute_network" "default" {
-  name                    = var.network_name
-  auto_create_subnetworks = false
-}
-
 data "terraform_remote_state" "networking" {
   backend = "gcs"
   config = {
@@ -26,71 +21,27 @@ data "terraform_remote_state" "networking" {
   workspace = "networking"
 }
 
-resource "google_compute_router" "default" {
-  name    = "lb-http-router"
-  network = google_compute_network.default.self_link
-  region  = var.region
-}
-
-module "cloud-nat" {
-  source     = "terraform-google-modules/cloud-nat/google"
-  version    = "~> 2.2"
-  router     = google_compute_router.default.name
-  project_id = var.project
-  region     = var.region
-  name       = "cloud-nat-lb-http-router"
-}
-
-data "template_file" "group-startup-script" {
-  template = file(format("%s/gceme.sh.tpl", path.module))
-
-  vars = {
-    PROXY_PATH = ""
+data "terraform_remote_state" "api" {
+  backend = "gcs"
+  config = {
+    bucket  = "${var.terraform_remote_state_bucket}"
+    prefix  = "${var.terraform_remote_state_prefix}"
+    credentials = "${file("./gcloud-service-account.json")}"
   }
-}
-
-module "mig_template" {
-  source     = "terraform-google-modules/vm/google//modules/instance_template"
-  version    = "~> 7.9"
-  network    = google_compute_network.default.self_link
-  subnetwork = google_compute_subnetwork.default.self_link
-  service_account = {
-    email  = ""
-    scopes = ["cloud-platform"]
-  }
-  name_prefix    = var.network_name
-  startup_script = data.template_file.group-startup-script.rendered
-  tags = [
-    var.network_name,
-    module.cloud-nat.router_name
-  ]
-}
-
-module "mig" {
-  source            = "terraform-google-modules/vm/google//modules/mig"
-  version           = "~> 7.9"
-  instance_template = module.mig_template.self_link
-  region            = var.region
-  hostname          = var.network_name
-  target_size       = 2
-  named_ports = [{
-    name = "http",
-    port = 80
-  }]
-  network    = google_compute_network.default.self_link
-  subnetwork = google_compute_subnetwork.default.self_link
+  workspace = "api"
 }
 
 module "gce-lb-http" {
-  source            = "../../"
+  source            = "../../Modules/terraform-google-lb-http"
+  #source            = "../../"
   name              = "mig-http-lb"
-  project           = var.project
-  target_tags       = [var.network_name]
+  project           = var.project_id
+  target_tags       = ["${data.terraform_remote_state.networking.outputs.network_name}"]
   firewall_networks = ["${data.terraform_remote_state.networking.outputs.network_name}"]
 
 
   backends = {
-    default = {
+    default = { 
       description                     = null
       protocol                        = "HTTP"
       port                            = 80
@@ -123,7 +74,8 @@ module "gce-lb-http" {
 
       groups = [
         {
-          group                        = module.mig.instance_group
+          group                        = "${data.terraform_remote_state.api.outputs.instance_group}"
+          #group                        = module.mig.instance_group
           balancing_mode               = null
           capacity_scaler              = null
           description                  = null

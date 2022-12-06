@@ -1,9 +1,9 @@
 ###############################################################################################################
 # 
-project_id = "alpine-effort-370518"
+project_id = "sanfernando-id-desarrollo"
 
 # "Nombre del VPC"
 network_name = "vpcdev"
 
 # 
-region = "us-west1"
+region = "us-central1"

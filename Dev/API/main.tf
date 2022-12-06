@@ -21,6 +21,14 @@ data "terraform_remote_state" "networking" {
   workspace = "networking"
 }
 
+data "template_file" "group-startup-script" {
+  template = file(format("%s/template/gceme.sh.tpl", path.module))
+
+  vars = {
+    PROXY_PATH = ""
+  }
+}
+
 module "instance_template" {
   source      = "../../Modules/terraform-google-vm/modules/instance_template"
   #source          = "../../../modules/instance_template"
@@ -29,7 +37,7 @@ module "instance_template" {
   machine_type    = var.machine_type
   tags            = var.tags
   labels          = var.labels
-  startup_script  = var.startup_script
+  startup_script  = data.template_file.group-startup-script.rendered
   metadata        = var.metadata
   service_account = var.service_account
 

@@ -24,3 +24,12 @@ output "mig_self_link" {
   value       = module.mig.self_link
 }
 
+output "instance_group" {
+  description = "Instance-group url of managed instance group"
+  value       = module.mig.instance_group
+}
+
+output "instance_group_manager" {
+  description = "An instance of google_compute_region_instance_group_manager of the instance group."
+  value       = module.mig
+}
