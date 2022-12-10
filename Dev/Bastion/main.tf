@@ -52,6 +52,7 @@ module "iap_bastion_group" {
   machine_type  = var.machine_type
   image_family  = var.image_family
   image_project = var.image_project
+  #startup_script = var.startup_script
   startup_script = data.template_file.init.rendered
   //atributos adicionales a modulo original
   disk_size_gb  = var.disk_size_gb

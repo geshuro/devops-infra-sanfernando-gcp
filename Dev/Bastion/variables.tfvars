@@ -25,3 +25,5 @@ disk_size_gb = "20"
 disk_type = "pd-ssd"
 
 additional_ports = ["3306"]
+
+startup_script = ""

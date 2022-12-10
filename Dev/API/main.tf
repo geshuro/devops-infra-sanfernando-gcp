@@ -37,7 +37,8 @@ module "instance_template" {
   machine_type    = var.machine_type
   tags            = var.tags
   labels          = var.labels
-  startup_script  = data.template_file.group-startup-script.rendered
+  #startup_script  = data.template_file.group-startup-script.rendered
+  startup_script  = var.startup_script
   metadata        = var.metadata
   service_account = var.service_account
 
