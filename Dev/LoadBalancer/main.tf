@@ -31,6 +31,16 @@ data "terraform_remote_state" "api" {
   workspace = "api"
 }
 
+data "terraform_remote_state" "security" {
+  backend = "gcs"
+  config = {
+    bucket  = "${var.terraform_remote_state_bucket}"
+    prefix  = "${var.terraform_remote_state_prefix}"
+    credentials = "${file("./gcloud-service-account.json")}"
+  }
+  workspace = "security"
+}
+
 module "gce-lb-http" {
   source            = "../../Modules/terraform-google-lb-http"
   #source            = "../../"
@@ -50,7 +60,7 @@ module "gce-lb-http" {
       connection_draining_timeout_sec = null
       enable_cdn                      = false
       compression_mode                = null
-      security_policy                 = null
+      security_policy                 = "${data.terraform_remote_state.security.outputs.id}"
       session_affinity                = null
       affinity_cookie_ttl_sec         = null
       custom_request_headers          = null
