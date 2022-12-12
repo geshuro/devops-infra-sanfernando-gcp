@@ -83,7 +83,7 @@ variable "owasp_rules" {
           'owasp-crs-v030001-id942190-sqli']
         )
         EOF
-      description = "Prevent sql injection attacks"
+      description = "Prevenir ataques de Inserción de SQL"
     }
 
     rule_xss = {
@@ -97,21 +97,21 @@ variable "owasp_rules" {
         ]
         )
         EOF
-      description = "Prevent cross site scripting attacks"
+      description = "Preventir ataques de Secuencia de comandos entre sitios"
     }
 
     rule_lfi = {
       action      = "deny(403)"
       priority    = "1002"
       expression  = "evaluatePreconfiguredExpr('lfi-stable')"
-      description = "Prevent "
+      description = "Prevenir Inclusión de archivos locales"
     }
 
     rule_canary = {
       action      = "deny(403)"
       priority    = "1003"
       expression  = "evaluatePreconfiguredExpr('rce-stable')"
-      description = "Prevent "
+      description = "Prevenir Ejecución de código remoto"
     }
 
     rule_rfi = {
@@ -122,14 +122,14 @@ variable "owasp_rules" {
         ]
         )
         EOF
-      description = "Prevent "
+      description = "Prevenir Inclusión de archivos remotos"
     }
 
     rule_methodenforcement = {
       action      = "deny(403)"
       priority    = "1005"
       expression  = "evaluatePreconfiguredExpr('methodenforcement-stable')"
-      description = "Prevent "
+      description = "Prevenir Aplicación de métodos"
     }
 
     rule_scandetection = {
@@ -141,7 +141,7 @@ variable "owasp_rules" {
         ]
         )
         EOF
-      description = "Prevent "
+      description = "Prevenir Detección de escáner"
     }
 
     rule_protocolattach = {
@@ -153,14 +153,21 @@ variable "owasp_rules" {
         ]
         )
         EOF
-      description = "Prevent "
+      description = "Prevenir Ataque de protocolo "
+    }
+
+    rule_php = {
+      action      = "deny(403)"
+      priority    = "1008"
+      expression  = "evaluatePreconfiguredExpr('php-stable')"
+      description = "Prevenir Ataque de inserción de PHP"
     }
 
     rule_sessionfixation = {
       action      = "deny(403)"
-      priority    = "1008"
+      priority    = "1009"
       expression  = "evaluatePreconfiguredExpr('sessionfixation-stable')"
-      description = "Prevent "
+      description = "Prevenir Ataque de fijación de sesión "
     }
   }
   type = map(object({
